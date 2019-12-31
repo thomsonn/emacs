@@ -179,6 +179,9 @@
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
   (add-hook 'org-mode-hook 'org-display-inline-images))
 
+(use-package org-journal
+  :ensure t)
+
 (use-package projectile
   :ensure t
   :init
