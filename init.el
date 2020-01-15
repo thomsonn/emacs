@@ -77,13 +77,6 @@
 	python-shell-interpreter-args "-i --pdb --ipython-dir=~/.config/ipython")
   (delete `elpy-module-highlight-indentation elpy-modules))
 
-(use-package ess
-  :ensure t
-  :init
-  (setq ess-eval-visibly nil)
-  (setq ess-set-style 'C++)
-  (setq ess-fancy-comments nil))
-
 (use-package haskell-mode
   :ensure t
   :bind (:map haskell-mode-map
@@ -127,11 +120,6 @@
 
 (use-package ibuffer-vc
   :ensure t)
-
-(use-package j-mode
-  :ensure t
-  :config
-  (setq j-console-cmd "/usr/lib/j8/bin/jconsole"))
 
 (use-package julia-repl
   :ensure t
