@@ -125,6 +125,9 @@
   :config
   (helm-mode 1))
 
+(use-package ibuffer-vc
+  :ensure t)
+
 (use-package j-mode
   :ensure t
   :config
