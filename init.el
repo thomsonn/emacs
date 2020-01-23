@@ -117,6 +117,11 @@
   :config
   (helm-mode 1))
 
+(use-package ibuffer
+  :bind (("C-x C-b" . ibuffer))
+  :config
+  (setq ibuffer-never-show-predicates (list (rx "*helm"))))
+
 (use-package ibuffer-vc
   :ensure t)
 
