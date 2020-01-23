@@ -111,8 +111,7 @@
 	 ("C-z" . helm-select-action))
   :config
   (setq helm-split-window-in-side-p t)
-  (setq helm-mode-fuzzy-match t)
-  (setq helm-boring-buffer-regexp-list (list (rx "*magit-") (rx "*helm"))))
+  (setq helm-mode-fuzzy-match t))
 
 (use-package helm-mode
   :config
@@ -210,7 +209,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (magit web-mode tidal helm-projectile projectile ob-sagemath julia-repl j-mode helm use-package intero ess elpy ein discover-my-major base16-theme))))
+    (web-beautify magit web-mode tidal helm-projectile projectile ob-sagemath julia-repl j-mode helm use-package intero ess elpy ein discover-my-major base16-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
