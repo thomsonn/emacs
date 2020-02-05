@@ -61,11 +61,11 @@
 
 (use-package ein
   :ensure t
-  :pin melpa-stable)
+  :pin melpa)
 
 (use-package elpy
   :ensure t
-  :pin melpa-stable
+  :pin melpa
   :init
   (advice-add 'python-mode :before 'elpy-enable)
   :config
@@ -138,7 +138,7 @@
 
 (use-package magit
   :ensure t
-  :pin melpa-stable)
+  :pin melpa)
 
 (use-package markdown-mode
   :ensure t)
