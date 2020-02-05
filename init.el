@@ -23,7 +23,6 @@
        (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
   (add-to-list 'package-archives (cons "melpa" url) t))
 (package-initialize)
-;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
@@ -76,6 +75,13 @@
   (setq python-shell-interpreter "ipython"
 	python-shell-interpreter-args "-i --pdb --ipython-dir=~/.config/ipython")
   (delete `elpy-module-highlight-indentation elpy-modules))
+
+(use-package fuel
+  :ensure t
+  :mode ("\\.factor\\'" . factor-mode)
+  :interpreter ("factor" . factor-mode)
+  :init
+  (setq fuel-factor-root-dir "/usr/lib/factor"))
 
 (use-package haskell-mode
   :ensure t
