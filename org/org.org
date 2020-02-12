@@ -3,10 +3,12 @@
 * Prettify
 #+BEGIN_SRC emacs-lisp
   (setq org-src-fontify-natively t)
+  (setq org-fontify-whole-heading-line t)
 
-  ;; (setq org-hide-emphasis-markers t)
+  (setq org-startup-indented t)
   (setq org-hide-leading-stars t)
   (setq org-ellipsis " \u25bc")
+  (setq org-indent-mode t)
 #+END_SRC
 
 * Capture templates
