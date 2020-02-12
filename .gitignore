@@ -1,4 +1,8 @@
 *
 
 !.gitignore
-!init.el
+!/init.el
+
+!README.md
+!org/
+!org/*.org
