@@ -103,7 +103,7 @@ I'm giving these a spin to see if I like them.
 #+BEGIN_SRC emacs-lisp
   (pcase system-type
     (`gnu/linux  (set-frame-font "Deja Vu Sans Mono 9"))
-    (`windows-nt (set-frame-font "-normal-r-normal-normal-14-97-96-96-c-*-iso8859-1")))
+    (`windows-nt (set-frame-font "-outline-Consolas-normal-r-normal-normal-14-97-96-96-c-*-iso8859-1")))
 
   (use-package base16-theme
     :config
@@ -230,6 +230,11 @@ Loads [[org.org][org/org.org]].
     :defer)
 #+END_SRC
 
+Enable ~polymode~.
+#+BEGIN_SRC emacs-lisp
+  (use-package poly-org)
+#+END_SRC
+
 Enable ~toc-org~ so this file can have a ToC in GitHub.
 #+BEGIN_SRC emacs-lisp
   (use-package toc-org
@@ -300,16 +305,18 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :defer
     :diminish
     :config
-    (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
-    (setq python-shell-interpreter "ipython")
-    (setq python-shell-interpreter-args "-i --pdb --ipython-dir=~/.config/ipython"))
+    (setq python-shell-interpreter "jupyter")
+    (setq python-shell-interpreter-args "console --simple-prompt")
+    (setq python-shell-prompt-detect-failure-warning nil)
+    (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
+    (defalias 'workon 'pyvenv-workon))
 
   (use-package elpy
     :defer
     :init
     (advice-add 'python-mode :before 'elpy-enable)
     :config
-    (setq elpy-rpc-backend "jedi")
+    ;; (setq elpy-rpc-backend "jedi")
     (delete `elpy-module-highlight-indentation elpy-modules))
 
   (use-package pyvenv
@@ -345,6 +352,11 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :mode "\\.R?md\\'"
     :config
     (setq markdown-fontify-code-blocks-natively t))
+#+END_SRC
+
+Enable ~polymode~.
+#+BEGIN_SRC emacs-lisp
+  (use-package poly-markdown)
 #+END_SRC
 
 ** HTML/CSS
