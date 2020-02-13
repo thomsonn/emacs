@@ -232,7 +232,8 @@ Loads [[org.org][org/org.org]].
 
 Enable ~polymode~.
 #+BEGIN_SRC emacs-lisp
-  (use-package poly-org)
+  (use-package poly-org
+    :defer)
 #+END_SRC
 
 Enable ~toc-org~ so this file can have a ToC in GitHub.
@@ -356,7 +357,8 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
 
 Enable ~polymode~.
 #+BEGIN_SRC emacs-lisp
-  (use-package poly-markdown)
+  (use-package poly-markdown
+    :defer)
 #+END_SRC
 
 ** HTML/CSS
@@ -413,6 +415,8 @@ Enable ~polymode~.
   (use-package discover-my-major
     :bind (("C-h C-m" . discover-my-major)
            ("C-h M-m" . discover-my-mode)))
+
+  (use-package pdf-tools)
 
   (use-package tramp
     :defer
