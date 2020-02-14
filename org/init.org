@@ -14,17 +14,17 @@
   - [[#ibuffer][Ibuffer]]
   - [[#company][Company]]
 - [[#languages][Languages]]
-  - [[#haskell][Haskell]]
   - [[#python][Python]]
   - [[#r][R]]
   - [[#julia][Julia]]
-  - [[#markdown][Markdown]]
-  - [[#htmlcss][HTML/CSS]]
+  - [[#haskell][Haskell]]
+  - [[#cc][C/C++]]
   - [[#factor][Factor]]
   - [[#j][J]]
   - [[#tidal][Tidal]]
-  - [[#cc][C/C++]]
+- [[#file-handling][File handling]]
 - [[#miscellaneous][Miscellaneous]]
+- [[#maybe][Maybe]]
 
 * Enable MELPA and use-package
 Use MELPA.
@@ -55,7 +55,7 @@ Load ~use-package.el~.
   (setq use-package-always-ensure t)
 
   ;; For profiling
-  ;; (setq use-package-verbose t)
+  (setq use-package-verbose t)
 #+END_SRC
 
 * Configuration
@@ -229,7 +229,8 @@ Loads [[org.org][org/org.org]].
     :init
     (org-babel-load-file (expand-file-name "org/org.org" user-emacs-directory)))
 
-  (use-package org-journal)
+  (use-package org-journal
+    :defer)
 
   (use-package ob-sagemath
     :defer)
@@ -265,45 +266,7 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :config
     (add-hook 'prog-mode-hook 'company-mode))
 #+END_SRC
-
 * Languages
-
-** Haskell
-#+BEGIN_SRC emacs-lisp
-  (use-package haskell-mode
-    :mode (("\\.hs\\'" . haskell-mode))
-    :bind (("C-c C-l" . haskell-process-load-or-reload)
-           ("C-`" . haskell-interactive-bring)
-           ("C-c C-t" . haskell-process-do-type)
-           ("C-c C-i" . haskell-process-do-info)
-           ("C-c C-c" . haskell-compile)
-           ("C-c h" . haskell-hoogle)
-           ("C-c C-c" . haskell-process-cabal-build)
-           ("C-c C-k" . haskell-interactive-mode-clear)
-           ("C-c c" . haskell-process-cabal))
-    :config
-    (setq haskell-compile-cabal-build-command "stack build")
-    (setq haskell-process-type 'stack-ghci)
-    (setq haskell-process-args-stack-ghci '("--ghci-options=-ferror-spans -fshow-loaded-modules" "--no-build" "--no-load")))
-
-  (use-package haskell-interactive-mode
-    :ensure nil
-    :defer)
-
-  (use-package haskell-process
-    :ensure nil
-    :defer
-    :config
-    (setq haskell-process-suggest-remove-import-lines t)
-    (setq haskell-process-auto-import-loaded-modules t)
-    (setq haskell-process-log t))
-
-  (use-package dante
-    :after haskell-mode
-    :commands 'dante-mode
-    :init
-    (add-hook 'haskell-mode-hook 'dante-mode))
-#+END_SRC
 
 ** Python
 #+BEGIN_SRC emacs-lisp
@@ -352,24 +315,49 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     (add-hook 'julia-mode-hook 'julia-repl-mode))
 #+END_SRC
 
-** Markdown
+** Haskell
 #+BEGIN_SRC emacs-lisp
-  (use-package markdown-mode
-    :mode "\\.R?md\\'"
+  (use-package haskell-mode
+    :mode (("\\.hs\\'" . haskell-mode))
+    :bind (("C-c C-l" . haskell-process-load-or-reload)
+           ("C-`" . haskell-interactive-bring)
+           ("C-c C-t" . haskell-process-do-type)
+           ("C-c C-i" . haskell-process-do-info)
+           ("C-c C-c" . haskell-compile)
+           ("C-c h" . haskell-hoogle)
+           ("C-c C-c" . haskell-process-cabal-build)
+           ("C-c C-k" . haskell-interactive-mode-clear)
+           ("C-c c" . haskell-process-cabal))
     :config
-    (setq markdown-fontify-code-blocks-natively t))
-#+END_SRC
+    (setq haskell-compile-cabal-build-command "stack build")
+    (setq haskell-process-type 'stack-ghci)
+    (setq haskell-process-args-stack-ghci '("--ghci-options=-ferror-spans -fshow-loaded-modules" "--no-build" "--no-load")))
 
-Enable ~polymode~.
-#+BEGIN_SRC emacs-lisp
-  (use-package poly-markdown
+  (use-package haskell-interactive-mode
+    :ensure nil
     :defer)
+
+  (use-package haskell-process
+    :ensure nil
+    :defer
+    :config
+    (setq haskell-process-suggest-remove-import-lines t)
+    (setq haskell-process-auto-import-loaded-modules t)
+    (setq haskell-process-log t))
+
+  (use-package dante
+    :after haskell-mode
+    :commands 'dante-mode
+    :init
+    (add-hook 'haskell-mode-hook 'dante-mode))
 #+END_SRC
 
-** HTML/CSS
+** C/C++
 #+BEGIN_SRC emacs-lisp
-  (use-package web-mode
-    :mode "\\.html?\\'")
+  (use-package cc-mode
+    :defer
+    :config
+    (setq c-default-style "stroustrup"))
 #+END_SRC
 
 ** Factor
@@ -403,25 +391,39 @@ Enable ~polymode~.
       (setq tidal-boot-script-path (expand-file-name "BootTidal.hs" filepath))))
 #+END_SRC
 
-** C/C++
-#+BEGIN_SRC emacs-lisp
-  (use-package cc-mode
-    :defer
-    :config
-    (setq c-default-style "stroustrup"))
-#+END_SRC
-
-* Miscellaneous
-
+* File handling
 #+BEGIN_SRC emacs-lisp
   (use-package csv-mode
     :mode "\\.csv\\'")
 
+  (use-package dockerfile-mode
+    :mode "Dockerfile\\'")
+
+  (use-package markdown-mode
+    :mode "\\.R?md\\'"
+    :config
+    (setq markdown-fontify-code-blocks-natively t))
+
+  (use-package poly-markdown
+    :defer)
+
+  (use-package pdf-tools)
+
+  (use-package powershell
+    :mode "\\.ps1\\'")
+
+  (use-package yaml-mode
+    :mode "\\.y[a]ml\\'")
+
+  (use-package web-mode
+    :mode "\\.html?\\'")
+#+END_SRC
+* Miscellaneous
+
+#+BEGIN_SRC emacs-lisp
   (use-package discover-my-major
     :bind (("C-h C-m" . discover-my-major)
            ("C-h M-m" . discover-my-mode)))
-
-  (use-package pdf-tools)
 
   (use-package tramp
     :defer
@@ -433,3 +435,11 @@ Enable ~polymode~.
     :config
     (global-undo-tree-mode))
 #+END_SRC
+* Maybe
+Here's a list of other packages to explore:
+- [[https://github.com/abo-abo/ace-window][ace-window]]
+- [[https://github.com/abo-abo/avy][avy]]
+- jedi
+- [[https://github.com/emacs-lsp/lsp-mode][lsp]]
+- [[https://github.com/Malabarba/paradox][paradox]]
+- [[http://github.com/realgud/realgud/][realgud]]

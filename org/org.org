@@ -35,14 +35,5 @@
      (R . t)
      (sagemath . t)))
   (setq org-confirm-babel-evaluate nil)
-  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
-  (add-hook 'org-mode-hook 'org-display-inline-images)
-#+END_SRC
-
-* File associations
-#+BEGIN_SRC emacs-lisp
-  (setq browse-url-browser-function 'browse-url-generic
-	browse-url-generic-program "firefox")
-  (add-to-list 'org-file-apps '(("\\.djvu\\'" . "zathura %s")
-				("\\.pdf\\'" . "zathura %s")) t)
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 #+END_SRC
