@@ -209,6 +209,9 @@ I'm giving these a spin to see if I like them.
   (use-package counsel-projectile
     :config
     (counsel-projectile-mode))
+
+  (use-package counsel-tramp
+    :bind (("C-c s" . counsel-tramp)))
 #+END_SRC
 
 ** Magit
@@ -319,15 +322,16 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
 #+BEGIN_SRC emacs-lisp
   (use-package haskell-mode
     :mode (("\\.hs\\'" . haskell-mode))
-    :bind (("C-c C-l" . haskell-process-load-or-reload)
-           ("C-`" . haskell-interactive-bring)
-           ("C-c C-t" . haskell-process-do-type)
-           ("C-c C-i" . haskell-process-do-info)
-           ("C-c C-c" . haskell-compile)
-           ("C-c h" . haskell-hoogle)
-           ("C-c C-c" . haskell-process-cabal-build)
-           ("C-c C-k" . haskell-interactive-mode-clear)
-           ("C-c c" . haskell-process-cabal))
+    :bind (:map haskell-mode-map
+		("C-c C-l" . haskell-process-load-or-reload)
+		("C-`" . haskell-interactive-bring)
+		("C-c C-t" . haskell-process-do-type)
+		("C-c C-i" . haskell-process-do-info)
+		("C-c C-c" . haskell-compile)
+		("C-c h" . haskell-hoogle)
+		("C-c C-c" . haskell-process-cabal-build)
+		("C-c C-k" . haskell-interactive-mode-clear)
+		("C-c c" . haskell-process-cabal))
     :config
     (setq haskell-compile-cabal-build-command "stack build")
     (setq haskell-process-type 'stack-ghci)
@@ -425,10 +429,7 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :bind (("C-h C-m" . discover-my-major)
            ("C-h M-m" . discover-my-mode)))
 
-  (use-package tramp
-    :defer
-    :config
-    (setq tramp-default-method "ssh"))
+  (setq tramp-default-method "ssh")
 
   (use-package undo-tree
     :diminish
