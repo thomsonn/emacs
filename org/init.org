@@ -6,9 +6,9 @@
 - [[#configuration][Configuration]]
 - [[#themes][Themes]]
 - [[#productivity][Productivity]]
+  - [[#projectile][Projectile]]
   - [[#helm][Helm]]
   - [[#ivy][Ivy]]
-  - [[#projectile][Projectile]]
   - [[#magit][Magit]]
   - [[#org][Org]]
   - [[#ibuffer][Ibuffer]]
@@ -113,6 +113,17 @@ I'm giving these a spin to see if I like them.
 #+END_SRC
 
 * Productivity
+** Projectile
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :demand
+    :diminish
+    :bind (("s-p" . projectile-command-map)
+           ("C-c p" . projectile-command-map))
+    :config
+    (projectile-mode +1))
+#+END_SRC
+
 ** Helm
    :PROPERTIES:
    :header-args: :tangle no
@@ -189,21 +200,15 @@ I'm giving these a spin to see if I like them.
            ("C-r" . counsel-minibuffer-history)))
 
   (use-package swiper
-    :bind (("\C-s" . swiper))
+    :bind (("C-s" . swiper))
     :config
     ;; enable this if you want `swiper' to use it
-    ;; (setq search-default-mode #'char-fold-to-regexp))
-#+END_SRC
+    ;; (setq search-default-mode #'char-fold-to-regexp)
+       )
 
-** Projectile
-#+BEGIN_SRC emacs-lisp
-  (use-package projectile
-    :demand
-    :diminish
-    :bind (("s-p" . projectile-command-map)
-           ("C-c p" . projectile-command-map))
+  (use-package counsel-projectile
     :config
-    (projectile-mode +1))
+    (counsel-projectile-mode))
 #+END_SRC
 
 ** Magit
