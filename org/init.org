@@ -226,7 +226,7 @@ Loads [[org.org][org/org.org]].
 #+BEGIN_SRC emacs-lisp
   (use-package org
     :bind (("C-c l" . org-store-link)
-           ;; ("C-c a" . org-agenda)
+           ("C-c a" . org-agenda)
            ("C-c c" . org-capture)
            ("C-c b" . org-iswitchb))
     :init
@@ -411,7 +411,8 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
   (use-package poly-markdown
     :defer)
 
-  (use-package pdf-tools)
+  (use-package pdf-tools
+    :defer)
 
   (use-package powershell
     :mode "\\.ps1\\'")
@@ -439,8 +440,14 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
 * Maybe
 Here's a list of other packages to explore:
 - [[https://github.com/abo-abo/ace-window][ace-window]]
+- auto-complete
 - [[https://github.com/abo-abo/avy][avy]]
+- [[http://company-mode.github.io/][company]]
+- [[https://github.com/syohex/emacs-git-gutter-fringe][git-gutter-fringe]]
 - jedi
 - [[https://github.com/emacs-lsp/lsp-mode][lsp]]
+- [[https://github.com/jaypei/emacs-neotree][neotree]]
 - [[https://github.com/Malabarba/paradox][paradox]]
 - [[http://github.com/realgud/realgud/][realgud]]
+- [[http://github.com/Malabarba/smart-mode-line][smart-mode-line]]
+- [[http://nschum.de/src/emacs/tempo-snippets/][tempo-snippets]]

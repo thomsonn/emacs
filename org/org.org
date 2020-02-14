@@ -2,7 +2,9 @@
 
 * Prettify
 #+BEGIN_SRC emacs-lisp
-  (setq org-src-fontify-natively t)
+    (setq org-todo-keywords '("TODO" "STARTED" "WAITING" "DONE"))
+
+    (setq org-src-fontify-natively t)
   (setq org-fontify-whole-heading-line t)
 
   (setq org-startup-indented t)
@@ -11,18 +13,34 @@
   (setq org-indent-mode t)
 #+END_SRC
 
+* Basic setup
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-files (directory-files-recursively "~/Dropbox/agenda" "org\\'"))
+
+  (setq org-log-done t)
+
+  (set-register ?o '(file . "~/Dropbox/agenda/organiser.org"))
+#+END_SRC
+
+* Refiling
+#+BEGIN_SRC emacs-lisp
+  (setq org-refile-targets '(("~/Dropbox/maybe.org" :level . 1)
+			     (nil :maxlevel . 9)
+			     (org-agenda-files :maxlevel . 9)))
+#+END_SRC
 * Capture templates
 #+BEGIN_SRC emacs-lisp
-  (setq org-log-done t)
-  (setq org-default-notes-file "~/org/notes.org")
+  (setq org-directory "~/Dropbox")
+  (setq org-default-notes-file "~/Dropbox/agenda/inbox.org")
+
   (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
+        '(("t" "Todo" entry (file+headline "~/Dropbox/agenda/inbox.org" "Tasks")
            "* TODO %?\n  %i\n  %a")
+	  ("n" "Note" entry (file+headline "~/Dropbox/agenda/inbox.org" "Tasks")
+           "* %? :NOTE: %?\n  %i\n  %a")
           ("u" "uri" entry
-           (file+headline "~/documents/bookmarks.org" "Some Default Headline for captures")
+	   (file+headline "~/Dropbox/bookmarks.org" "Some Default Headline for captures")
            "*** %^{Title}\n\n    Source: %u, %c\n    %i")))
-  ;; (setq org-agenda-files (list "~/org/todo.org"))
-  ;; (setq org-refile-targets '(("~/org/maybe.org" :level . 1)))
 #+END_SRC
 
 * Babel
@@ -34,6 +52,7 @@
      (python . t)
      (R . t)
      (sagemath . t)))
+
   (setq org-confirm-babel-evaluate nil)
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 #+END_SRC
