@@ -331,19 +331,11 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
 		("C-c C-c" . haskell-process-cabal-build)
 		("C-c C-k" . haskell-interactive-mode-clear)
 		("C-c c" . haskell-process-cabal))
+    :hook (haskell-mode . interactive-haskell-mode)
     :config
     (setq haskell-compile-cabal-build-command "stack build")
     (setq haskell-process-type 'stack-ghci)
-    (setq haskell-process-args-stack-ghci '("--ghci-options=-ferror-spans -fshow-loaded-modules" "--no-build" "--no-load")))
-
-  (use-package haskell-interactive-mode
-    :ensure nil
-    :defer)
-
-  (use-package haskell-process
-    :ensure nil
-    :defer
-    :config
+    (setq haskell-process-args-stack-ghci '("--ghci-options=-ferror-spans -fshow-loaded-modules" "--no-build" "--no-load"))
     (setq haskell-process-suggest-remove-import-lines t)
     (setq haskell-process-auto-import-loaded-modules t)
     (setq haskell-process-log t))
