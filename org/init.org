@@ -24,7 +24,7 @@
   - [[#tidal][Tidal]]
 - [[#file-handling][File handling]]
 - [[#miscellaneous][Miscellaneous]]
-- [[#maybe][Maybe]]
+- [[#maybe-someday][Maybe someday]]
 
 * Enable MELPA and use-package
 Use MELPA.
@@ -235,6 +235,12 @@ Loads [[org.org][org/org.org]].
   (use-package org-journal
     :defer)
 
+  (use-package org-pdfview)
+
+  (use-package org-web-tools
+    :bind (:map org-mode-map
+		("C-c C-S-l" . org-web-tools-insert-link-for-url)))
+
   (use-package ob-sagemath
     :defer)
 #+END_SRC
@@ -400,7 +406,10 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :defer)
 
   (use-package pdf-tools
-    :defer)
+    :load-path "site-lisp/pdf-tools/lisp"
+      :magic ("%PDF" . pdf-view-mode)
+      :config
+      (pdf-tools-install :no-query))
 
   (use-package powershell
     :mode "\\.ps1\\'")
@@ -429,7 +438,7 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :config
     (global-undo-tree-mode))
 #+END_SRC
-* Maybe
+* Maybe someday
 Here's a list of other packages to explore:
 - [[https://github.com/abo-abo/ace-window][ace-window]]
 - auto-complete
@@ -439,7 +448,9 @@ Here's a list of other packages to explore:
 - jedi
 - [[https://github.com/emacs-lsp/lsp-mode][lsp]]
 - [[https://github.com/jaypei/emacs-neotree][neotree]]
+- [[https://github.com/markus1189/org-pdfview][org-pdfview]]
 - [[https://github.com/Malabarba/paradox][paradox]]
 - [[http://github.com/realgud/realgud/][realgud]]
 - [[http://github.com/Malabarba/smart-mode-line][smart-mode-line]]
 - [[http://nschum.de/src/emacs/tempo-snippets/][tempo-snippets]]
+- [[https://gitlab.com/ideasman42/emacs-undo-fu][undo-fu]]

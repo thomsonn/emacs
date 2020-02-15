@@ -21,7 +21,12 @@
 
   (set-register ?o '(file . "~/Dropbox/agenda/organiser.org"))
 #+END_SRC
-
+* Settings
+#+BEGIN_SRC emacs-lisp
+  (setq org-special-ctrl-a/e t)
+    (setq org-special-ctrl-k t)
+    (setq org-yank-adjusted-subtrees t)
+#+END_SRC
 * Refiling
 #+BEGIN_SRC emacs-lisp
   (setq org-refile-targets '(("~/Dropbox/maybe.org" :level . 1)
