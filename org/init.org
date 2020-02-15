@@ -248,8 +248,7 @@ Enable ~polymode~.
 Enable ~toc-org~ so this file can have a ToC in GitHub.
 #+BEGIN_SRC emacs-lisp
   (use-package toc-org
-    :commands toc-org-enable
-    :init (add-hook 'org-mode-hook 'toc-org-enable))
+    :hook (org-mode . toc-org-enable))
 #+END_SRC
 
 ** Ibuffer
@@ -266,8 +265,7 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :diminish
-    :config
-    (add-hook 'prog-mode-hook 'company-mode))
+    :hook (prog-mode . company-mode))
 #+END_SRC
 * Languages
 
@@ -312,10 +310,11 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
 
 ** Julia
 #+BEGIN_SRC emacs-lisp
+  (use-package julia-mode
+    :mode "\\.jl\\'")
+
   (use-package julia-repl
-    :mode "\\.jl\\'"
-    :config
-    (add-hook 'julia-mode-hook 'julia-repl-mode))
+    :hook (julia-mode . julia-repl-mode))
 #+END_SRC
 
 ** Haskell
@@ -350,10 +349,7 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     (setq haskell-process-log t))
 
   (use-package dante
-    :after haskell-mode
-    :commands 'dante-mode
-    :init
-    (add-hook 'haskell-mode-hook 'dante-mode))
+    :hook (haskell-mode . dante-mode))
 #+END_SRC
 
 ** C/C++
@@ -434,13 +430,7 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
 
   (use-package paredit
     :diminish
-    :config
-    (add-hook 'emacs-lisp-mode-hook			#'enable-paredit-mode)
-      (add-hook 'eval-expression-minibuffer-setup-hook	#'enable-paredit-mode)
-      (add-hook 'ielm-mode-hook				#'enable-paredit-mode)
-      (add-hook 'lisp-mode-hook				#'enable-paredit-mode)
-      (add-hook 'lisp-interaction-mode-hook		#'enable-paredit-mode)
-      (add-hook 'scheme-mode-hook			#'enable-paredit-mode))
+    :hook ((emacs-lisp-mode eval-expression-minibuffer-setup ielm-mode lisp-mode lisp-interaction-mode scheme-mode) . enable-paredit-mode))
 
   (use-package undo-tree
     :diminish
