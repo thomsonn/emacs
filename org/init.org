@@ -229,7 +229,7 @@ Loads [[org.org][org/org.org]].
            ("C-c a" . org-agenda)
            ("C-c c" . org-capture)
            ("C-c b" . org-iswitchb))
-    :init
+    :config
     (org-babel-load-file (expand-file-name "org/org.org" user-emacs-directory)))
 
   (use-package org-journal
@@ -427,11 +427,15 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :bind (("C-h C-m" . discover-my-major)
            ("C-h M-m" . discover-my-mode)))
 
-  (setq tramp-default-method "ssh")
+  (use-package macrostep
+    :bind (:map emacs-lisp-mode-map
+		("C-c e" . macrostep-expand)))
 
   (use-package paredit
     :diminish
     :hook ((emacs-lisp-mode eval-expression-minibuffer-setup ielm-mode lisp-mode lisp-interaction-mode scheme-mode) . enable-paredit-mode))
+
+  (setq tramp-default-method "ssh")
 
   (use-package undo-tree
     :diminish
