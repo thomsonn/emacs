@@ -312,6 +312,8 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     (setq ess-eval-visibly nil)
     (setq ess-set-style 'C++)
     (setq ess-fancy-comments nil))
+
+  (use-package poly-R)
 #+END_SRC
 
 ** Julia
@@ -398,7 +400,7 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :mode "Dockerfile\\'")
 
   (use-package markdown-mode
-    :mode "\\.R?md\\'"
+    :mode "\\.md\\'"
     :config
     (setq markdown-fontify-code-blocks-natively t))
 
