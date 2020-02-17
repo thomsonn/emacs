@@ -439,10 +439,11 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
 
   (setq tramp-default-method "ssh")
 
-  (use-package undo-tree
+  (use-package undo-fu
     :diminish
-    :config
-    (global-undo-tree-mode))
+    :demand
+    :bind (("C-z" . undo-fu-only-undo)
+	   ("C-S-z" . undo-fu-only-redo)))
 #+END_SRC
 * Maybe someday
 Here's a list of other packages to explore:
@@ -454,9 +455,7 @@ Here's a list of other packages to explore:
 - jedi
 - [[https://github.com/emacs-lsp/lsp-mode][lsp]]
 - [[https://github.com/jaypei/emacs-neotree][neotree]]
-- [[https://github.com/markus1189/org-pdfview][org-pdfview]]
 - [[https://github.com/Malabarba/paradox][paradox]]
 - [[http://github.com/realgud/realgud/][realgud]]
 - [[http://github.com/Malabarba/smart-mode-line][smart-mode-line]]
 - [[http://nschum.de/src/emacs/tempo-snippets/][tempo-snippets]]
-- [[https://gitlab.com/ideasman42/emacs-undo-fu][undo-fu]]
