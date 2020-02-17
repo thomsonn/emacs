@@ -15,37 +15,42 @@
 
 * Basic setup
 #+BEGIN_SRC emacs-lisp
+  (setq org-directory "~/Dropbox")
   (setq org-agenda-files (directory-files-recursively "~/Dropbox/agenda" "org\\'"))
+  (setq org-default-notes-file "~/Dropbox/agenda/inbox.org")
 
   (setq org-log-done t)
 
   (set-register ?o '(file . "~/Dropbox/agenda/organiser.org"))
 #+END_SRC
+
 * Settings
 #+BEGIN_SRC emacs-lisp
   (setq org-special-ctrl-a/e t)
   (setq org-special-ctrl-k t)
   (setq org-yank-adjusted-subtrees t)
 #+END_SRC
-* Refiling
-#+BEGIN_SRC emacs-lisp
-  (setq org-refile-targets '(("~/Dropbox/maybe.org" :level . 1)
-			     (nil :maxlevel . 9)
-			     (org-agenda-files :maxlevel . 9)))
-#+END_SRC
+
 * Capture templates
 #+BEGIN_SRC emacs-lisp
-  (setq org-directory "~/Dropbox")
-  (setq org-default-notes-file "~/Dropbox/agenda/inbox.org")
+  (defun transform-square-brackets-to-round-ones(string-to-transform)
+  "Transforms [ into ( and ] into ), other chars left unchanged."
+  (concat
+   (mapcar #'(lambda (c) (if (equal c ?[) ?\( (if (equal c ?]) ?\) c))) string-to-transform)))
 
   (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline "~/Dropbox/agenda/inbox.org" "Tasks")
-           "* TODO %?\n  %i\n  %a")
-	  ("n" "Note" entry (file+headline "~/Dropbox/agenda/inbox.org" "Tasks")
-           "* %? :NOTE: %?\n  %i\n  %a")
-          ("u" "uri" entry
-	   (file+headline "~/Dropbox/bookmarks.org" "Some Default Headline for captures")
-           "*** %^{Title}\n\n    Source: %u, %c\n    %i")))
+	'(("t" "Todo [inbox]" entry (file+headline "" "Tasks")
+	   "* TODO %i%?")
+	  ("p" "Protocol" entry (file+headline "" "Inbox")
+	   "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+	  ("L" "Protocol Link" entry (file+headline "" "Inbox")
+	   "* %? [[%:link][%(transform-square-brackets-to-round-ones \"%:description\")]]\n")))
+#+END_SRC
+
+* Refiling
+#+BEGIN_SRC emacs-lisp
+  (setq org-refile-targets '(("~/Dropbox/someday.org" :level . 1)
+			     (org-agenda-files :maxlevel . 3)))
 #+END_SRC
 
 * Babel
