@@ -39,18 +39,18 @@
    (mapcar #'(lambda (c) (if (equal c ?[) ?\( (if (equal c ?]) ?\) c))) string-to-transform)))
 
   (setq org-capture-templates
-	'(("t" "Todo [inbox]" entry (file+headline "" "Tasks")
-	   "* TODO %i%?")
-	  ("p" "Protocol" entry (file+headline "" "Inbox")
-	   "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-	  ("L" "Protocol Link" entry (file+headline "" "Inbox")
-	   "* %? [[%:link][%(transform-square-brackets-to-round-ones \"%:description\")]]\n")))
+        '(("t" "Todo [inbox]" entry (file+headline "" "Tasks")
+           "* TODO %i%?")
+          ("p" "Protocol" entry (file+headline "" "Inbox")
+           "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+          ("L" "Protocol Link" entry (file+headline "" "Inbox")
+           "* %? [[%:link][%(transform-square-brackets-to-round-ones \"%:description\")]]\n")))
 #+END_SRC
 
 * Refiling
 #+BEGIN_SRC emacs-lisp
   (setq org-refile-targets '(("~/Dropbox/someday.org" :level . 1)
-			     (org-agenda-files :maxlevel . 3)))
+                             (org-agenda-files :maxlevel . 3)))
 #+END_SRC
 
 * Babel

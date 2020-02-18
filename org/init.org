@@ -94,6 +94,8 @@ Don't save customisation in ~init.el~.
 
 I'm giving these a spin to see if I like them.
 #+BEGIN_SRC emacs-lisp
+  (set-default indent-tabs-mode nil)
+
   (setq sentence-end-double-space nil)
 
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -239,7 +241,7 @@ Loads [[org.org][org/org.org]].
 
   (use-package org-web-tools
     :bind (:map org-mode-map
-		("C-c C-S-l" . org-web-tools-insert-link-for-url)))
+                ("C-c C-S-l" . org-web-tools-insert-link-for-url)))
 
   (use-package ob-sagemath
     :defer)
@@ -330,15 +332,15 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
   (use-package haskell-mode
     :mode (("\\.hs\\'" . haskell-mode))
     :bind (:map haskell-mode-map
-		("C-c C-l" . haskell-process-load-or-reload)
-		("C-`" . haskell-interactive-bring)
-		("C-c C-t" . haskell-process-do-type)
-		("C-c C-i" . haskell-process-do-info)
-		("C-c C-c" . haskell-compile)
-		("C-c h" . haskell-hoogle)
-		("C-c C-c" . haskell-process-cabal-build)
-		("C-c C-k" . haskell-interactive-mode-clear)
-		("C-c c" . haskell-process-cabal))
+                ("C-c C-l" . haskell-process-load-or-reload)
+                ("C-`" . haskell-interactive-bring)
+                ("C-c C-t" . haskell-process-do-type)
+                ("C-c C-i" . haskell-process-do-info)
+                ("C-c C-c" . haskell-compile)
+                ("C-c h" . haskell-hoogle)
+                ("C-c C-c" . haskell-process-cabal-build)
+                ("C-c C-k" . haskell-interactive-mode-clear)
+                ("C-c c" . haskell-process-cabal))
     :hook (haskell-mode . interactive-haskell-mode)
     :config
     (setq haskell-compile-cabal-build-command "stack build")
@@ -431,7 +433,7 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
 
   (use-package macrostep
     :bind (:map emacs-lisp-mode-map
-		("C-c e" . macrostep-expand)))
+                ("C-c e" . macrostep-expand)))
 
   (use-package paredit
     :diminish
@@ -443,7 +445,7 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :diminish
     :demand
     :bind (("C-z" . undo-fu-only-undo)
-	   ("C-S-z" . undo-fu-only-redo)))
+           ("C-S-z" . undo-fu-only-redo)))
 #+END_SRC
 * Maybe someday
 Here's a list of other packages to explore:
