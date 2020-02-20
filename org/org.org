@@ -33,6 +33,8 @@
 
 * Capture templates
 #+BEGIN_SRC emacs-lisp
+  (require 'org-protocol)
+
   (defun transform-square-brackets-to-round-ones(string-to-transform)
   "Transforms [ into ( and ] into ), other chars left unchanged."
   (concat

@@ -94,7 +94,7 @@ Don't save customisation in ~init.el~.
 
 I'm giving these a spin to see if I like them.
 #+BEGIN_SRC emacs-lisp
-  (set-default indent-tabs-mode nil)
+  (set-default 'indent-tabs-mode nil)
 
   (setq sentence-end-double-space nil)
 
@@ -315,7 +315,8 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     (setq ess-set-style 'C++)
     (setq ess-fancy-comments nil))
 
-  (use-package poly-R)
+  (use-package poly-R
+    :defer)
 #+END_SRC
 
 ** Julia
