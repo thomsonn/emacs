@@ -432,6 +432,9 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :bind (("C-h C-m" . discover-my-major)
            ("C-h M-m" . discover-my-mode)))
 
+  (use-package expand-region
+      :bind ("C-=" . er/expand-region))
+
   (use-package macrostep
     :bind (:map emacs-lisp-mode-map
                 ("C-c e" . macrostep-expand)))
