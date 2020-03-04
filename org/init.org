@@ -107,11 +107,9 @@ I'm giving these a spin to see if I like them.
     (`gnu/linux  (set-frame-font "Deja Vu Sans Mono 9"))
     (`windows-nt (set-frame-font "-outline-Consolas-normal-r-normal-normal-14-97-96-96-c-*-iso8859-1")))
 
-  (use-package base16-theme
-    :config
-    (load-theme 'base16-default-dark t)
-    (setq frame-background-mode 'dark)
-    (setq base16-theme-256-color-source "base16-shell"))
+  (use-package nord-theme
+      :config
+      (load-theme 'nord t))
 #+END_SRC
 
 * Productivity
