@@ -11,6 +11,7 @@
   (setq org-hide-leading-stars t)
   (setq org-ellipsis " \u25bc")
   (setq org-indent-mode t)
+  (setq org-catch-invisible-edits 'smart)
 #+END_SRC
 
 * Basic setup
