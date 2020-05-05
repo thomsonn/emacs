@@ -281,10 +281,8 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :defer
     :diminish
     :config
-    (setq python-shell-interpreter "jupyter")
-    (setq python-shell-interpreter-args "console --simple-prompt")
-    (setq python-shell-prompt-detect-failure-warning nil)
-    (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
+    (setq python-shell-interpreter "ipython")
+    (setq python-shell-interpreter-args "-i --simple-prompt")
     (defalias 'workon 'pyvenv-workon))
 
   (use-package elpy
@@ -292,7 +290,7 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :init
     (advice-add 'python-mode :before 'elpy-enable)
     :config
-    ;; (setq elpy-rpc-backend "jedi")
+    (setq elpy-rpc-backend "jedi")
     (delete `elpy-module-highlight-indentation elpy-modules))
 
   (use-package pyvenv
@@ -301,7 +299,9 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     (setenv "WORKON_HOME" "~/miniconda3/envs"))
 
   (use-package ein
-    :defer)
+    :defer
+    :config
+    (setq ein:output-area-inlined-images t))
 #+END_SRC
 
 ** R
