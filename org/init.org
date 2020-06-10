@@ -58,6 +58,25 @@ Load ~use-package.el~.
   (setq use-package-verbose t)
 #+END_SRC
 
+#+begin_src emacs-lisp
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+
+  (let ((straight-current-profile 'pinned))
+    (add-to-list 'straight-x-pinned-packages
+                 '("exec-path-from-shell" . "7e7f38188473ba1fc5325888707de3f9153d76b0")))
+#+end_src
+
 * Configuration
 Useful options.
 #+BEGIN_SRC emacs-lisp
@@ -98,7 +117,7 @@ I'm giving these a spin to see if I like them.
 
   (setq sentence-end-double-space nil)
 
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
 
 * Themes
@@ -298,6 +317,9 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :config
     (setenv "WORKON_HOME" "~/miniconda3/envs"))
 
+  (use-package exec-path-from-shell
+    :straight (:host github :repo "purcell/exec-path-from-shell"))
+  
   (use-package ein
     :defer
     :config
