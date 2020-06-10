@@ -235,7 +235,7 @@ Loads [[org.org][org/org.org]].
   (use-package org-journal
     :defer)
 
-  (use-package org-pdfview)
+  (use-package org-pdftools)
 
   (use-package org-web-tools
     :bind (:map org-mode-map
