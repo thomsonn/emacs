@@ -61,7 +61,7 @@
 #+BEGIN_SRC emacs-lisp
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((emacs-lisp . nil)
+   '((emacs-lisp . t)
      ;; (ipython . t)
      (python . t)
      (R . t)
