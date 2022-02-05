@@ -18,6 +18,7 @@
   - [[#r][R]]
   - [[#julia][Julia]]
   - [[#haskell][Haskell]]
+  - [[#rust][Rust]]
   - [[#cc][C/C++]]
   - [[#factor][Factor]]
   - [[#j][J]]
@@ -129,6 +130,10 @@ I'm giving these a spin to see if I like them.
   (use-package nord-theme
       :config
       (load-theme 'nord t))
+
+  (custom-theme-set-faces
+   'user
+   '(variable-pitch ((t (:family "Vollkorn" :height 110 :weight thin)))))
 #+END_SRC
 
 * Productivity
@@ -404,6 +409,12 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
   (use-package dante
     :hook (haskell-mode . dante-mode))
 #+END_SRC
+
+** Rust
+#+begin_src emacs-lisp
+  (use-package rust-mode
+    :mode "\\.rs\\'")
+#+end_src
 
 ** C/C++
 #+BEGIN_SRC emacs-lisp
