@@ -118,6 +118,8 @@ I'm giving these a spin to see if I like them.
 
   (setq sentence-end-double-space nil)
 
+  (setq ring-bell-function 'ignore)
+
   ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
 
