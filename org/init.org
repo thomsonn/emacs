@@ -482,6 +482,9 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
   (use-package powershell
     :mode "\\.ps1\\'")
 
+  (use-package terraform-mode
+    :mode "\\.tf\\'")
+
   (use-package yaml-mode
     :mode "\\.y[a]ml\\'")
 
