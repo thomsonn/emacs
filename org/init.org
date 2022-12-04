@@ -322,7 +322,7 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
   (use-package pyvenv
     :defer
     :config
-    (setenv "WORKON_HOME" "~/miniconda3/envs"))
+    (setenv "WORKON_HOME" "~/mambaforge/envs"))
 
   (use-package exec-path-from-shell
     :straight (:host github :repo "purcell/exec-path-from-shell"))
@@ -331,34 +331,6 @@ Enable ~toc-org~ so this file can have a ToC in GitHub.
     :straight (:host github :repo "millejoh/emacs-ipython-notebook")
     :defer
     :init
-    (defun json-encode-string (string)
-          "Return a JSON representation of STRING."
-          ;; Try to avoid buffer overhead in trivial cases, while also
-          ;; avoiding searching pathological strings for escape characters.
-          ;; Since `string-match-p' doesn't take a LIMIT argument, we use
-          ;; string length as our heuristic.  See also bug#20154.
-          (if (and (< (length string) json--long-string-threshold)
-                   (not (string-match-p (rx json--escape) string)))
-              (concat "\"" string "\"")
-            (with-current-buffer
-                (or json--string-buffer
-                    (with-current-buffer (generate-new-buffer " *json-string*")
-                      ;; This seems to afford decent performance gains.
-                      (setq-local inhibit-modification-hooks t)
-                      (setq json--string-buffer (current-buffer))))
-              (insert ?\" (substring-no-properties string))
-              (goto-char (1+ (point-min)))
-              (while (re-search-forward (rx json--escape) nil 'move)
-                (let ((char (preceding-char)))
-                  (delete-char -1)
-                  (insert ?\\ (or
-                               ;; Special JSON character (\n, \r, etc.).
-                               (car (rassq char json-special-chars))
-                               ;; Fallback: UCS code point in \uNNNN form.
-                               (format "u%04x" char)))))
-              (insert ?\")
-              ;; Empty buffer for next invocation.
-              (delete-and-extract-region (point-min) (point-max)))))
     :config
     (setq ein:output-area-inlined-images t))
 #+END_SRC
