@@ -70,3 +70,28 @@
   (setq org-confirm-babel-evaluate nil)
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 #+END_SRC
+
+* Filter bookmarks
+#+BEGIN_SRC emacs-lisp
+  (defun org-filter-bookmarks-by-date ()
+    "Filter bookmarks in the current org buffer by date range using org-match-sparse-tree."
+    (interactive)
+    (let ((from (org-read-date nil))
+          (to (org-read-date nil)))
+      (message (format "Showing bookmarks published between %s and %s" from to))
+      (org-match-sparse-tree nil (format ":Published>\"%s\"&:Published<\"%s\"" from to))))
+
+  (define-key org-mode-map (kbd "C-c b") 'org-filter-bookmarks-by-date)
+#+END_SRC
+
+* Random bookmark
+#+BEGIN_SRC emacs-lisp
+  (defun org-random-bookmark ()
+    (interactive)
+    (goto-line (+ 1 (random (count-lines 1 (point-max)))))
+    (let* ((heading (thing-at-point 'line t)))
+      (re-search-forward "\\[\\(http.*?\\)\\]")
+      (org-show-entry)))
+
+  (define-key org-mode-map (kbd "C-c r") 'org-random-bookmark)
+#+END_SRC
