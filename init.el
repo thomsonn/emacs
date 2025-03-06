@@ -5,5 +5,9 @@
 ;; You may delete these explanatory comments.
 ;; (package-initialize)
 
+;; Ensure the diminish package is installed.
+(unless (package-installed-p 'diminish)
+  (package-install 'diminish))
+
 (require 'org)
 (org-babel-load-file (expand-file-name "org/init.org" user-emacs-directory))
